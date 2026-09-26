@@ -14,7 +14,6 @@ package com.gorsok.positionexporter;
 // Nothing is written while logged out. Nothing is ever sent over the network.
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
@@ -55,7 +54,11 @@ public class PositionExporterPlugin extends Plugin
 	@Inject
 	private ItemManager itemManager;
 
-	private final Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+	// RuneLite requires reusing the client's Gson instance (customized via newBuilder()).
+	@Inject
+	private Gson clientGson;
+
+	private Gson gson;
 
 	private WorldPoint lastWritten;
 
@@ -66,6 +69,7 @@ public class PositionExporterPlugin extends Plugin
 	@Override
 	protected void startUp()
 	{
+		gson = clientGson.newBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 		lastWritten = null;
 		// Export current offers right away if the plugin is enabled while logged in.
 		geDirty = true;

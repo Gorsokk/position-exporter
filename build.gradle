@@ -69,7 +69,7 @@ tasks.register('shadowJar', Jar) {
 }
 task runClient(type: JavaExec) {
 	group = 'application'
-	description = 'Lance un client RuneLite avec Position Exporter charge (equivalent au bouton Run de PositionExporterPluginTest)'
+	description = 'Lance un client RuneLite de dev avec Position Exporter charge'
 	mainClass = 'com.gorsok.positionexporter.PositionExporterPluginTest'
 	classpath = sourceSets.test.runtimeClasspath
 	jvmArgs = ['-ea']
