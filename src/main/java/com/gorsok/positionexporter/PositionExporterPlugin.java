@@ -12,6 +12,7 @@ package com.gorsok.positionexporter;
 // Both files live next to the output of the "Character Export" plugin (Plugin Hub),
 // so tools like OSRS GE Toolkit can read everything from one folder.
 // Nothing is written while logged out. Nothing is ever sent over the network.
+// Data is collected on the client thread; the disk writes happen on a background thread.
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
@@ -53,6 +55,10 @@ public class PositionExporterPlugin extends Plugin
 
 	@Inject
 	private ItemManager itemManager;
+
+	// RuneLite's shared background executor: keeps file I/O off the client thread.
+	@Inject
+	private ScheduledExecutorService executor;
 
 	// RuneLite requires reusing the client's Gson instance (customized via newBuilder()).
 	@Inject
@@ -159,8 +165,8 @@ public class PositionExporterPlugin extends Plugin
 		snapshot.exported_at = Instant.now().toString();
 		snapshot.player_name = playerName;
 		snapshot.world = client.getWorld();
-		snapshot.note = "price = prix de l'offre; avg_price = prix reel moyen (spent / quantity_filled). "
-				+ "Un slot BOUGHT/SOLD reste visible tant que tu n'as pas collecte.";
+		snapshot.note = "price = offer price; avg_price = real average price (spent / quantity_filled). "
+				+ "A BOUGHT/SOLD slot stays listed until it is collected.";
 
 		List<GeSlot> slots = new ArrayList<>();
 		for (int i = 0; i < offers.length; i++)
@@ -224,6 +230,13 @@ public class PositionExporterPlugin extends Plugin
 
 	private void writeJson(String playerName, String fileName, Object data)
 	{
+		// Serialize now (client thread, consistent snapshot), write later (background thread).
+		final String json = gson.toJson(data);
+		executor.execute(() -> writeFile(playerName, fileName, json));
+	}
+
+	private static void writeFile(String playerName, String fileName, String json)
+	{
 		try
 		{
 			Path baseDir = RuneLite.RUNELITE_DIR.toPath()
@@ -236,7 +249,7 @@ public class PositionExporterPlugin extends Plugin
 			// Write to a temp file then swap it in, so a reader never sees half a file.
 			try (Writer writer = Files.newBufferedWriter(tmpFile, StandardCharsets.UTF_8))
 			{
-				gson.toJson(data, writer);
+				writer.write(json);
 			}
 			try
 			{
