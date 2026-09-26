@@ -14,7 +14,7 @@ repositories {
 }
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'com.example.ExamplePluginTest'
+def pluginMainClass = 'com.gorsok.positionexporter.PositionExporterPluginTest'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -27,7 +27,7 @@ dependencies {
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
-group = 'com.example'
+group = 'com.gorsok'
 
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = 'UTF-8'
@@ -66,4 +66,12 @@ tasks.register('shadowJar', Jar) {
 	group = BasePlugin.BUILD_GROUP
 	archiveClassifier.set('shadow')
 	archiveFileName.set("${rootProject.name}-${project.version}-all.jar")
+}
+task runClient(type: JavaExec) {
+	group = 'application'
+	description = 'Lance un client RuneLite avec Position Exporter charge (equivalent au bouton Run de PositionExporterPluginTest)'
+	mainClass = 'com.gorsok.positionexporter.PositionExporterPluginTest'
+	classpath = sourceSets.test.runtimeClasspath
+	jvmArgs = ['-ea']
+	standardInput = System.in
 }
