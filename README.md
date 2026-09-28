@@ -11,8 +11,9 @@ RuneLite plugin that writes two small JSON files on your computer, next to the o
 Files are written to `.runelite/character-exporter/<your character>/`.
 Nothing is written while logged out, and **nothing is ever sent over the network**.
 
-It is the data source for [OSRS GE Toolkit](https://github.com/Gorsokk/osrs-ge-toolkit)
-(live GE dashboard, flip/alch scanner, Windows alerts), but any tool can read the files.
+It is the data source for the free [OSRS Toolkit](https://github.com/Gorsokk/osrs-toolkit) desktop app
+(live GE dashboard, flip/alch scanner, Windows alerts, Claude connector, stream tools), but any tool can read the files.
+On its own the plugin only writes the files: install the app to use them.
 
 ## Example `ge_offers.json`
 
