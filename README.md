@@ -1,14 +1,18 @@
-# Position Exporter
+# OSRS Toolkit Exporter
 
-RuneLite plugin that writes two small JSON files on your computer, next to the output of the
-[Character Export](https://runelite.net/plugin-hub/show/character-export) plugin:
+Part of the **OSRS Toolkit** suite: the [OSRS Toolkit app](https://github.com/Gorsokk/osrs-toolkit), OSRS Toolkit Exporter (this plugin) and OSRS Toolkit Panel.
+
+Each export can be switched on or off in the plugin's settings: **Export position** and **Export GE offers** (both on by default).
+
+RuneLite plugin that writes two small JSON files on your computer. The OSRS Toolkit app reads them
+together with the files of the [Character Export](https://runelite.net/plugin-hub/show/character-export) plugin:
 
 | File | Updated | Contents |
 |---|---|---|
 | `position.json` | when your tile changes | world, plane, x/y, region id |
 | `ge_offers.json` | when a Grand Exchange slot changes | every slot: item, buy/sell, state, offer price, quantity filled/total, gp spent, real average price, gp still locked in buy offers |
 
-Files are written to `.runelite/character-exporter/<your character>/`.
+Files are written to RuneLite's data folder for this plugin: `.runelite/plugin-data/position-exporter/<your character>/`.
 Nothing is written while logged out, and **nothing is ever sent over the network**.
 
 It is the data source for the free [OSRS Toolkit](https://github.com/Gorsokk/osrs-toolkit) desktop app

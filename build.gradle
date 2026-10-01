@@ -14,7 +14,7 @@ repositories {
 }
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'com.gorsok.positionexporter.PositionExporterPluginTest'
+def pluginMainClass = 'com.gorsok.toolkitexporter.OsrsToolkitExporterPluginTest'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -69,8 +69,8 @@ tasks.register('shadowJar', Jar) {
 }
 task runClient(type: JavaExec) {
 	group = 'application'
-	description = 'Lance un client RuneLite de dev avec Position Exporter charge'
-	mainClass = 'com.gorsok.positionexporter.PositionExporterPluginTest'
+	description = 'Lance un client RuneLite de dev avec OSRS Toolkit Exporter charge'
+	mainClass = 'com.gorsok.toolkitexporter.OsrsToolkitExporterPluginTest'
 	classpath = sourceSets.test.runtimeClasspath
 	jvmArgs = ['-ea']
 	standardInput = System.in
