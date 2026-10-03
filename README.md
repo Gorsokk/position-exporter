@@ -52,3 +52,8 @@ On its own the plugin only writes the files: install the app to use them.
   ]
 }
 ```
+
+## Support and feedback
+
+This plugin is free and stays free. If it helps you, you can [support Gorsok on Ko-fi](https://ko-fi.com/gorsok),
+or just say thanks there. Bugs and ideas: [open an issue](https://github.com/Gorsokk/position-exporter/issues).
