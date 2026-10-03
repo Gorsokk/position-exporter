@@ -27,6 +27,8 @@ Nothing is written while logged out, and **nothing is ever sent over the network
 `game_quests.json` is read from the running game client (its Quest table), not from any website, so it always matches
 the game version you are playing. Codes whose meaning is not known (`difficulty_code`, `length_code`,
 `requirement_combat_raw`, `prerequisite_direct`, `prerequisite_indirect`) are written as raw values.
+Experience rewards (`xp_rewards[].xp`) are also written as the game stores them, **in tenths of an experience point**:
+divide by 10 to get the experience actually rewarded (for example `2000` means 200 XP).
 
 It is the data source for the free [OSRS Toolkit](https://github.com/Gorsokk/osrs-toolkit) desktop app
 (live GE dashboard, flip/alch scanner, Windows alerts, Claude connector, stream tools), but any tool can read the files.

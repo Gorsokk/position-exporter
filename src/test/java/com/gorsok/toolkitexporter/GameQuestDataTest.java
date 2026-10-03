@@ -184,6 +184,16 @@ public class GameQuestDataTest
 	}
 
 	@Test
+	public void experienceIsKeptRawAndTheNoteSaysItIsInTenths()
+	{
+		// The game stores quest experience in tenths of a point (Animal Magnetism: 25000 = 2,500 Woodcutting XP).
+		// The value is written unchanged; the note tells readers to divide by 10.
+		GameQuestData.Export e = decode(game());
+		assertEquals(25000, find(e, "Animal Magnetism").xp_rewards.get(3).xp);
+		assertTrue(e.note.contains("xp_rewards[].xp is the game's raw value, in tenths of an experience point"));
+	}
+
+	@Test
 	public void theOtherColumnsAreCarriedAsTheyAre()
 	{
 		GameQuestData.Quest q = find(decode(game()), "Animal Magnetism");

@@ -52,7 +52,9 @@ final class GameQuestData
 				+ "start.x/y/plane come from the packed start coordinate. required_quests are resolved from row ids. "
 				+ "npc_names has null where the game itself names the NPC \"null\". Rows of the table whose name has no "
 				+ "letter (placeholders for quests not defined yet) are left out and counted in skipped_placeholder_rows. "
-				+ "A skill the client has no name for is written as skill#<id>.";
+				+ "A skill the client has no name for is written as skill#<id>. "
+				+ "xp_rewards[].xp is the game's raw value, in tenths of an experience point: divide by 10 for the "
+				+ "experience actually rewarded.";
 		out.quests = new ArrayList<>();
 
 		List<Integer> rows = src.rows();
