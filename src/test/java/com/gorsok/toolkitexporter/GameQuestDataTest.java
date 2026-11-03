@@ -76,7 +76,7 @@ public class GameQuestDataTest
 		f.put(0, DBTableID.Quest.COL_MEMBERS, new Object[]{1});
 		f.put(0, DBTableID.Quest.COL_DIFFICULTY, new Object[]{1});
 		f.put(0, DBTableID.Quest.COL_LENGTH, new Object[]{2});
-		f.put(0, DBTableID.Quest.COL_QUESTPOINTS, new Object[]{1});
+		f.put(0, DBTableID.Quest.COL_QUESTPOINTS_OVERRIDE, new Object[]{1});
 		f.put(0, DBTableID.Quest.COL_SERIES, new Object[]{-1});
 		f.put(0, DBTableID.Quest.COL_RELEASEDATE, new Object[]{12}, new Object[]{12}, new Object[]{2006});
 		f.put(0, DBTableID.Quest.COL_REQUIREMENT_STATS, new Object[]{8, 4, 12, 18}, new Object[]{35, 30, 19, 18});
