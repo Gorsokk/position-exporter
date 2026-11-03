@@ -95,7 +95,7 @@ final class GameQuestData
 					&& number(src.field(row, DBTableID.Quest.COL_MEMBERS, 0)) == 1;
 			q.difficulty_code = number(src.field(row, DBTableID.Quest.COL_DIFFICULTY, 0));
 			q.length_code = number(src.field(row, DBTableID.Quest.COL_LENGTH, 0));
-			q.quest_points = number(src.field(row, DBTableID.Quest.COL_QUESTPOINTS, 0));
+			q.quest_points = number(src.field(row, DBTableID.Quest.COL_QUESTPOINTS_OVERRIDE, 0));
 			q.series = number(src.field(row, DBTableID.Quest.COL_SERIES, 0));
 			q.series_number = number(src.field(row, DBTableID.Quest.COL_SERIESNO, 0));
 			q.release_date_parts = new int[]{
